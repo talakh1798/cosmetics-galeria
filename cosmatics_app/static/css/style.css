@@ -1,0 +1,7 @@
+.bg-image{
+    background-image: url('../img/background.jpg')!important;
+    /* background-color:red !important; */
+    background-size: cover!important;
+    background-position: center !important;
+    height: 100vh !important;
+}
