@@ -1,14 +1,48 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from .models import User
+from . import models
+from django.contrib import messages
+import bcrypt
 
 
 def welcome(request):
     return render(request, 'Welcome.html')
 
 def login(request):
-    return render(request, 'login.html')
+    if request.method == "POST" :
+        email=request.POST['email']
+        password=request.POST['password']
+        user = User.objects.filter(email=email).first()
+        # use bcrypt's check_password_hash method, passing the hash from our database and the password from the form
+        if user and bcrypt.checkpw(password.encode(), user.password.encode()):
+            request.session['id'] = user.id
+            request.session['first_name'] = user.first_name
+            request.session['last_name'] = user.last_name
+            return redirect('home')   
+    return render(request, 'login.html', {'error': 'Invalid email or password'})
 
 def sign_up(request):
+    if request.method == "POST" : 
+        errors = User.objects.signup_validator(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect('sign_up')
+        else:
+            pw_hash = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()  # create the hash    
+            print(pw_hash)
+            user=models.create_account(request.POST,pw_hash=pw_hash)
+            request.session['id'] = user.id
+            request.session['first_name'] = user.first_name
+            request.session['last_name'] = user.last_name
+            return redirect('login')
     return render(request, 'sign_up.html')
+
+def logout(request):
+    request.session.clear()
+    # request.session.flush()
+    return redirect('/')
+   
 
 def home(request):
     return render(request, 'home.html')
