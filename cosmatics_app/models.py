@@ -30,7 +30,7 @@ class UserManager(models.Manager):
         # current_year = datetime.now().year
         # if postData['date_of_birth'].year > current_year - 18:
         #     errors['date_of_birth'] = "You must be at least 18 years old."
-            
+        
         # Add a phone number and validate that the user's number should be at least 10 digits
         if len(postData['phone_number']) < 10:
             errors['phone_number'] = "Phone number should be at least 10 digits long."
@@ -54,10 +54,11 @@ class User(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField()
+    # description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField()
-    image = models.ImageField(max_length=200)
+    image = models.ImageField(upload_to='img/')
+    total=models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     users = models.ManyToManyField(User,related_name="products")

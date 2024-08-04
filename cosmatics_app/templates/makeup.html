@@ -33,8 +33,31 @@
                 </ul>
             </div>
         </nav>
-    
+
         <div class="container mt-4">
+            <h2 class="text-center"><strong>MakeUp</strong></h2>
+            <div class="product-container">
+                {% for product in products %}
+                <div class="product-card">
+                    <form action="{% url 'makeup' %}" method="POST">
+                        {% csrf_token %}
+                        <img src="{{ product.image.url }}" alt="Product Image" class="product-image">
+                        <div class="product-details">
+                            <p>{{ product.name }}</p>
+                            <input type="hidden" name="name" value="{{product.name}}">
+                            <input type="hidden" name="price" value="{{ product.price }}">
+                            <!-- <input type="hidden" name="quantity" value="1"> -->
+                            <p class="product-price">${{ product.price }}</p>
+                            <input type="number" class="form-control" min="1" value="1" name="quantity">
+                            <button class="btn btn-dark">Buy</button>
+                        </div>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    
+        <!-- <div class="container mt-4">
             <h2 class="text-center"><strong>MakeUp</strong></h2>
             <div class="product-container">
                 <div class="product-card">
@@ -45,8 +68,8 @@
                         <input type="number" class="form-control" min="1" value="1" id="quantity">
                         <button  class="btn btn-dark">Buy</button>
                     </div>
-                </div>
-                <div class="product-card">
+                </div> -->
+                <!-- <div class="product-card">
                     <img src="{% static 'img/maskara.png' %} "alt="Product Image" class="product-image">
                     <div class="product-details">
                         <p>SUPERHERO WATERPROOF MASCARA</p>
@@ -54,8 +77,8 @@
                         <input type="number" class="form-control" min="1" value="1" id="quantity">
                         <button class="btn btn-dark">Buy</button>
                     </div>
-                </div>
-                <div class="product-card">
+                </div> -->
+                <!-- <div class="product-card">
                     <img src="{% static 'img/eye.png' %} " alt="Product Image" class="product-image">
                     <div class="product-details">
                         <p>SUPERHERO NO-TUG RETRACTABLE EYELINER</p>
@@ -63,8 +86,8 @@
                         <input type="number" class="form-control" min="1" value="1" id="quantity">
                         <button class="btn btn-dark">Buy</button>
                     </div>
-                </div>
-                <div class="product-card">
+                </div> -->
+                <!-- <div class="product-card">
                     <img src="{% static 'img/creme.png' %} " alt="Product Image" class="product-image">
                     <div class="product-details">
                         <p>BYE BYE REDNESS COLOR-CORRECTING CREAM</p>
@@ -72,8 +95,8 @@
                         <input type="number" class="form-control" min="1" value="1" id="quantity">
                         <button class="btn btn-dark">Buy</button>
                     </div>
-                </div>
-                <div class="product-card">
+                </div> -->
+                <!-- <div class="product-card">
                     <img src="{% static 'img/conc.png' %} " alt="Product Image" class="product-image">
                     <div class="product-details">
                         <p>BYE BYE UNDER EYE FULL COVERAGE CONCEALER</p>
@@ -81,8 +104,8 @@
                         <input type="number" class="form-control" min="1" value="1" id="quantity">
                         <button class="btn btn-dark">Buy</button>
                     </div>
-                </div>
-                <div class="product-card">
+                </div> -->
+                <!-- <div class="product-card">
                     <img src="{% static 'img/bouder.png' %} " alt="Product Image" class="product-image">
                     <div class="product-details">
                         <p>CELEBRATION FOUNDATION AND COSMETICS POWDER</p>
@@ -90,8 +113,8 @@
                         <input type="number" class="form-control" min="1" value="1" id="quantity">
                         <button class="btn btn-dark">Buy</button>
                     </div>
-                </div>
-                <div class="product-card">
+                </div> -->
+                <!-- <div class="product-card">
                     <img src="{% static 'img/blush.png' %} " alt="Product Image" class="product-image">
                     <div class="product-details">
                         <p>BYE BYE PORES BLUSH FULL BLUSHY SHINY</p>
@@ -99,8 +122,8 @@
                         <input type="number" class="form-control" min="1" value="1" id="quantity">
                         <button class="btn btn-dark">Buy</button>
                     </div>
-                </div>
-                <div class="product-card">
+                </div> -->
+                <!-- <div class="product-card">
                     <img src="{% static 'img/balet.png' %} " alt="Product Image" class="product-image">
                     <div class="product-details">
                         <p>NATURALLY PRETTY MATTE EYESHADOW PALETTE</p>
@@ -109,9 +132,9 @@
                         <button  class="btn btn-dark">Buy</button>
                     </div>
                 </div>
-                
-            </div>
-        </div>
+                 -->
+            <!-- </div>
+        </div> -->
 
     </div>
     

@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import User
+from .models import User ,Product
 from . import models
 from django.contrib import messages
 import bcrypt
@@ -43,13 +43,41 @@ def logout(request):
     # request.session.flush()
     return redirect('/')
    
-
 def home(request):
     return render(request, 'home.html')
 
 def makeup(request):
-    return render(request, 'makeup.html')
+    products = Product.objects.all()
+    if request.method == 'POST':
+        price = float(request.POST.get('price',0))
+        quantity = int(request.POST.get('quantity',0))
+        name = request.POST.get('name','not found')
+
+        total = price * quantity
+        request.session['total']= total
+        request.session['name']= name
+        request.session['price'] = price
+        request.session['quantity'] = quantity
+        return redirect('purchase')
+    return render(request, 'makeup.html', {'products': products})
+
+def purchase(request):
+    total = request.session.get('total',None)
+    name = request.session.get('name',None)
+    price = request.session.get('price',None)
+    quantity = request.session.get('quantity',None)
+    return render(request, 'purchase.html', {'total': total, 'name': name, 'price': price, 'quantity': quantity})
 
 def skincare(request):
     return render(request, 'skincare.html')
+
+# def submit(request):
+#     if request.method == 'POST':
+#         name = request.POST.get('name')
+#         email = request.POST.get('email')
+#         message = request.POST.get('message')
+#         models.ContactForm.objects.create(name=name, email=email, message=message)
+#         return redirect('home')
+#     return render(request, 'contact.html')
+
 # Create your views here.
