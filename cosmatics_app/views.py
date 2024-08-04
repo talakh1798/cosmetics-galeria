@@ -71,13 +71,4 @@ def purchase(request):
 def skincare(request):
     return render(request, 'skincare.html')
 
-# def submit(request):
-#     if request.method == 'POST':
-#         name = request.POST.get('name')
-#         email = request.POST.get('email')
-#         message = request.POST.get('message')
-#         models.ContactForm.objects.create(name=name, email=email, message=message)
-#         return redirect('home')
-#     return render(request, 'contact.html')
-
 # Create your views here.
