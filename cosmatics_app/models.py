@@ -61,7 +61,7 @@ class Product(models.Model):
     total=models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    users = models.ManyToManyField(User,related_name="products")
+    users = models.ManyToManyField(User,related_name="products",null=True,blank=True)
 
 
     def __str__(self):
