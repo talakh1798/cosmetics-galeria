@@ -122,5 +122,8 @@ def skincare(request):
 #         return redirect('purchase')
 #     return render(request, 'skincare.html', {'products': products})
 
+def about_us(request):
+    return render(request, 'about_us.html')
+
 
 # Create your views here.

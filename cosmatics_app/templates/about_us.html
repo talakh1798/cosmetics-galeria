@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Cosmetics Galleria</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    
+</head>
+<body>
+    <div class="about-us">
+        <header class="header">
+            <h1>About Us</h1>
+            <p>Discover the essence of beauty with Cosmetics Galleria</p>
+        </header>
+        <section class="content">
+            <div class="mission">
+                <h2>Our Mission</h2>
+                <p>At Cosmetics Galleria, our mission is to provide high-quality, affordable beauty products that empower individuals to express their unique beauty. We believe in the transformative power of makeup and skincare, and we are dedicated to helping our customers look and feel their best.</p>
+            </div>
+            <div class="values">
+                <h2>Our Values</h2>
+                <ul>
+                    <li>Quality: We are committed to offering the best quality products.</li>
+                    <li>Inclusivity: We celebrate diversity and offer products for all skin types and tones.</li>
+                    <li>Sustainability: We prioritize eco-friendly practices in our product sourcing and packaging.</li>
+                    <li>Customer Satisfaction: We aim to provide exceptional customer service and support.</li>
+                </ul>
+            </div>
+            <div class="team">
+                <h2>Meet the Team</h2>
+                <div class="team-member">
+                    <img src="{% static 'img/ceo.jpg' %}" alt="Team Member 1">
+                    <h3>Tala khaled</h3>
+                    <p>Founder & CEO</p>
+                </div>
+                <!-- <div class="team-member">
+                    <img src="{% static 'img/unknown.jpg' %}" alt="Team Member 2">
+                    <h3>Muhammad jom'a</h3>
+                    <p>Chief Marketing Officer</p>
+                </div> -->
+            </div>
+        </section>
+        <footer class="footer">
+            <p>&copy; 2024 Cosmetics Galleria. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
