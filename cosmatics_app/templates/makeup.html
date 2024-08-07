@@ -22,39 +22,37 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="btn btn-outline-light text-dark" href="#">Home</a>
+                        <a class="btn btn-outline-light text-dark" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-light text-dark" href="#">Logout</a>
+                        <a class="btn btn-outline-light text-dark" href="{% url 'logout' %}">Logout</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-light text-dark" href="#">Cart</a>
+                        <a class="btn btn-outline-light text-dark" href="{% url 'purchase' %}">Cart</a>
                     </li>
                 </ul>
             </div>
         </nav>
-
         <div class="container mt-4">
             <h2 class="text-center"><strong>MakeUp</strong></h2>
-            <div class="product-container">
-                {% for product in products %}
-                <div class="product-card">
-                    <form action="{% url 'makeup' %}" method="POST">
-                        {% csrf_token %}
+            <form action="{% url 'makeup' %}" method="POST">
+                {% csrf_token %}
+                <div class="product-container">
+                    {% for product in products %}
+                    <div class="product-card">
+                        <input type="checkbox" name="selected_products" value="{{ product.id }}" class="product-checkbox">
                         <img src="{{ product.image.url }}" alt="Product Image" class="product-image">
                         <div class="product-details">
                             <p>{{ product.name }}</p>
-                            <input type="hidden" name="name" value="{{product.name}}">
-                            <input type="hidden" name="price" value="{{ product.price }}">
-                            <!-- <input type="hidden" name="quantity" value="1"> -->
                             <p class="product-price">${{ product.price }}</p>
-                            <input type="number" class="form-control" min="1" value="1" name="quantity">
-                            <button class="btn btn-dark">Buy</button>
+                            <input type="number" class="form-control" min="1" value="1" name="quantity_{{ product.id }}">
                         </div>
-                    </form>
-                </div>
-                {% endfor %}
-            </div>
+                    </div>
+                    {% endfor %}
+                    <div class="d-flex justify-content-center mt-3">
+                        <button type="submit" class="btn btn-dark">Buy Selected Products</button>
+                    </div>
+            </form>
         </div>
     </div>
     

@@ -47,28 +47,80 @@ def home(request):
     return render(request, 'home.html')
 
 def makeup(request):
-    products = Product.objects.all()
+    products = models.get_makeup()
     if request.method == 'POST':
-        price = float(request.POST.get('price',0))
-        quantity = int(request.POST.get('quantity',0))
-        name = request.POST.get('name','not found')
-
-        total = price * quantity
-        request.session['total']= total
-        request.session['name']= name
-        request.session['price'] = price
-        request.session['quantity'] = quantity
+        selected_products = request.POST.getlist('selected_products')
+        quantities = {}
+        for product_id in selected_products:
+            quantities[product_id] = int(request.POST.get(f'quantity_{product_id}'))
+        
+        total = 0
+        products_data = []
+        for product_id, quantity in quantities.items():
+            product = Product.objects.get(id=product_id)
+            total += float(product.price) * quantity
+            products_data.append({
+                'name': product.name,
+                'price': str(product.price),  # Convert to string
+                'quantity': quantity
+            })
+        
+        request.session['total'] = total
+        request.session['products_data'] = products_data
         return redirect('purchase')
     return render(request, 'makeup.html', {'products': products})
 
+# def purchase(request):
+#     total = request.session.get('total',None)
+#     name = request.session.get('name',None)
+#     price = request.session.get('price',None)
+#     quantity = request.session.get('quantity',None)
+#     return render(request, 'purchase.html', {'total': total, 'name': name, 'price': price, 'quantity': quantity})
+
+
 def purchase(request):
-    total = request.session.get('total',None)
-    name = request.session.get('name',None)
-    price = request.session.get('price',None)
-    quantity = request.session.get('quantity',None)
-    return render(request, 'purchase.html', {'total': total, 'name': name, 'price': price, 'quantity': quantity})
+    total = request.session.get('total', None)
+    products_data = request.session.get('products_data', [])
+    return render(request, 'purchase.html', {'total': total, 'products_data': products_data})
 
 def skincare(request):
-    return render(request, 'skincare.html')
+    products = models.get_skincare()
+    if request.method == 'POST':
+        selected_products = request.POST.getlist('selected_products')
+        quantities = {}
+        for product_id in selected_products:
+            quantities[product_id] = int(request.POST.get(f'quantity_{product_id}'))
+        
+        total = 0
+        products_data = []
+        for product_id, quantity in quantities.items():
+            product = Product.objects.get(id=product_id)
+            total += float(product.price) * quantity
+            products_data.append({
+                'name': product.name,
+                'price': str(product.price),  # Convert to string
+                'quantity': quantity
+            })
+        
+        request.session['total'] = total
+        request.session['products_data'] = products_data
+        return redirect('purchase')
+    return render(request, 'skincare.html', {'products': products})
+
+# def skincare(request):
+#     products = models.get_skincare()
+#     if request.method == 'POST':
+#         price = float(request.POST.get('price',0))
+#         quantity = int(request.POST.get('quantity',0))
+#         name = request.POST.get('name','not found')
+
+#         total = price * quantity
+#         request.session['total']= total
+#         request.session['name']= name
+#         request.session['price'] = price
+#         request.session['quantity'] = quantity
+#         return redirect('purchase')
+#     return render(request, 'skincare.html', {'products': products})
+
 
 # Create your views here.

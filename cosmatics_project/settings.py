@@ -84,8 +84,8 @@ DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'mycosmatics',
-#         'USER': 'root',
-#         'PASSWORD': '1234',
+#         'USER': 'myroot',
+#         'PASSWORD': 'root',
 #         'HOST': 'localhost',
 #         'PORT': 3306,
 #     }

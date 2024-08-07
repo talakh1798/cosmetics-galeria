@@ -3,7 +3,11 @@ body {
     font-family: 'Arial', sans-serif;
 }
 .container{
-    background-color: rgb(238, 223, 194);
+    /* background-color: rgb(238, 223, 194); */
+    background-image: url('../img/back.jpg')!important;
+    background-size: cover!important;
+    background-position: center !important;
+    /* height: 100vh !important; */
 }
 
 .nav-item {

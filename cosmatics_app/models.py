@@ -76,3 +76,9 @@ def create_account(request,pw_hash):
     phone_number=request['phone_number']
     return User.objects.create(first_name=first_name, last_name=last_name, email=email, password=password, date_of_birth=date_of_birth, phone_number=phone_number)
 
+def get_makeup():
+    return Product.objects.filter(id__gte=13,id__lte=20)
+
+def get_skincare():
+    return Product.objects.filter(id__gte=21,id__lte=29)
+
