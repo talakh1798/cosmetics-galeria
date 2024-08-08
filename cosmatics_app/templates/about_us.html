@@ -6,7 +6,6 @@
     <title>About Us - Cosmetics Galleria</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/about.css' %}">
-    
 </head>
 <body>
     <div class="about-us">
@@ -27,15 +26,22 @@
                     <li>Sustainability: We prioritize eco-friendly practices in our product sourcing and packaging.</li>
                     <li>Customer Satisfaction: We aim to provide exceptional customer service and support.</li>
                 </ul>
+                <div class="value-details">
+                    <p id="quality-detail" class="value-detail">Quality is our top priority...</p>
+                    <p id="inclusivity-detail" class="value-detail">We embrace diversity...</p>
+                    <p id="sustainability-detail" class="value-detail">We care for the planet...</p>
+                    <p id="customer-satisfaction-detail" class="value-detail">Our customers are our focus...</p>
+                </div>
             </div>
             <div class="team">
                 <h2>Meet the Team</h2>
-                <div class="team-member">
+                <div class="team-member" onclick="openLightbox('ceo.jpg', 'Tala khaled')">
                     <img src="{% static 'img/ceo.jpg' %}" alt="Team Member 1">
                     <h3>Tala khaled</h3>
                     <p>Founder & CEO</p>
                 </div>
-                <!-- <div class="team-member">
+                <!-- Uncomment this block to add another team member -->
+                <!-- <div class="team-member" onclick="openLightbox('unknown.jpg', 'Muhammad jom\'a')">
                     <img src="{% static 'img/unknown.jpg' %}" alt="Team Member 2">
                     <h3>Muhammad jom'a</h3>
                     <p>Chief Marketing Officer</p>
@@ -46,5 +52,13 @@
             <p>&copy; 2024 Cosmetics Galleria. All rights reserved.</p>
         </footer>
     </div>
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <span class="close" onclick="closeLightbox()">&times;</span>
+            <img class="lightbox-img" id="lightbox-img" src="" alt="">
+            <h3 id="lightbox-name"></h3>
+        </div>
+    </div>
+    <script src="{% static 'script.js' %}"></script>
 </body>
 </html>

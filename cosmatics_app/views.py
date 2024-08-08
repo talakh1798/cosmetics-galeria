@@ -83,6 +83,7 @@ def purchase(request):
     products_data = request.session.get('products_data', [])
     return render(request, 'purchase.html', {'total': total, 'products_data': products_data})
 
+
 def skincare(request):
     products = models.get_skincare()
     if request.method == 'POST':
