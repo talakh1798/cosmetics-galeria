@@ -11,25 +11,24 @@ class UserManager(models.Manager):
 
         # Add a lastname and validate that lastname at least 2 characters
         if len(postData['last_name']) < 2:
-            errors['last_name'] = "Last name should be at least 2 characters long."
-
+            errors['last_name'] = "Last name should be at least 2 characters long."   
+        
+        # Validates that the email provided  matches the specified regex pattern.
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if not EMAIL_REGEX.match(postData['email']):
             errors['email'] = "Invalid email address."
 
+        #  Checks if the email provided in already exists in the database
         if User.objects.filter(email=postData['email']).exists():
             errors['email'] = "Email address already exists."
 
+        # Add a password and validate that password at least 8 characters
         if len(postData['password']) < 8:
             errors['password'] = "Password should be at least 8 characters long."
 
+        # Checks if the password and confirm password fields match.
         if postData['password']!=postData['confirm_password']:
             errors['confirm_password'] = "Passwords do not match."
-        
-         # Add a birthday field and validate that the user is at least 18 years old 
-        # current_year = datetime.now().year
-        # if postData['date_of_birth'].year > current_year - 18:
-        #     errors['date_of_birth'] = "You must be at least 18 years old."
         
         # Add a phone number and validate that the user's number should be at least 10 digits
         if len(postData['phone_number']) < 10:
@@ -54,7 +53,6 @@ class User(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    # description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField()
     image = models.ImageField(upload_to='img/')
@@ -66,6 +64,7 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
     
 def create_account(request,pw_hash):
     first_name=request['first_name']
