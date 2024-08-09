@@ -65,12 +65,13 @@ def home(request):
 def makeup(request):
     products = models.get_makeup()
     if request.method == 'POST':
-        # Get the selected products and quantities from the form
-        selected_products = request.POST.get('selected_products')
+         # Get the selected products and quantities from the form
+        selected_products = request.POST.getlist('selected_products')
         # Convert selected products to a list of integers
         quantities = {}
         for product_id in selected_products:
             quantities[product_id] = int(request.POST.get(f'quantity_{product_id}'))
+        
         total = 0
         products_data = []
         for product_id, quantity in quantities.items():
@@ -78,15 +79,15 @@ def makeup(request):
             total += float(product.price) * quantity
             products_data.append({
                 'name': product.name,
-                # Convert price to string 
-                'price': str(product.price),  
+                # Convert price to string
+                'price': str(product.price), 
                 'quantity': quantity
             })
+        
         request.session['total'] = total
         request.session['products_data'] = products_data
         return redirect('purchase')
     return render(request, 'makeup.html', {'products': products})
-
 
 # this function renders the purchase page with the total cost and a list of selected products
 def purchase(request):
@@ -103,6 +104,7 @@ def skincare(request):
         quantities = {}
         for product_id in selected_products:
             quantities[product_id] = int(request.POST.get(f'quantity_{product_id}'))
+        
         total = 0
         products_data = []
         for product_id, quantity in quantities.items():
@@ -114,6 +116,7 @@ def skincare(request):
                 'price': str(product.price), 
                 'quantity': quantity
             })
+        
         request.session['total'] = total
         request.session['products_data'] = products_data
         return redirect('purchase')
@@ -125,4 +128,4 @@ def about_us(request):
     return render(request, 'about_us.html')
 
 
-
+# Create your views here.
