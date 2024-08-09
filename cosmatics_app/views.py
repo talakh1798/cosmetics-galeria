@@ -44,7 +44,12 @@ def logout(request):
     return redirect('/')
    
 def home(request):
-    return render(request, 'home.html')
+    user = User.objects.get(id=request.session['id'])
+    request.session['id'] = user.id
+    request.session['first_name'] = user.first_name
+    request.session['last_name'] = user.last_name
+    print(request.session['first_name'])
+    return render(request, 'home.html', {'first_name': user.first_name})
 
 def makeup(request):
     products = models.get_makeup()
@@ -69,14 +74,6 @@ def makeup(request):
         request.session['products_data'] = products_data
         return redirect('purchase')
     return render(request, 'makeup.html', {'products': products})
-
-# def purchase(request):
-#     total = request.session.get('total',None)
-#     name = request.session.get('name',None)
-#     price = request.session.get('price',None)
-#     quantity = request.session.get('quantity',None)
-#     return render(request, 'purchase.html', {'total': total, 'name': name, 'price': price, 'quantity': quantity})
-
 
 def purchase(request):
     total = request.session.get('total', None)
