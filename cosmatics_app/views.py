@@ -3,6 +3,8 @@ from .models import User ,Product
 from . import models
 from django.contrib import messages
 import bcrypt
+from django.http import JsonResponse
+
 
 # this function render the welcome page
 def welcome(request):
@@ -23,6 +25,7 @@ def login(request):
             request.session['last_name'] = user.last_name
             return redirect('home')   
     return render(request, 'login.html', {'error': 'Invalid email or password'})
+    
 
 
 # this function renders the sign up page with a form for the user to input their information
@@ -89,12 +92,12 @@ def makeup(request):
         return redirect('purchase')
     return render(request, 'makeup.html', {'products': products})
 
+
 # this function renders the purchase page with the total cost and a list of selected products
 def purchase(request):
     total = request.session.get('total', None)
     products_data = request.session.get('products_data', [])
     return render(request, 'purchase.html', {'total': total, 'products_data': products_data})
-
 
 # this function renders the skincare page with a list of products and a form for the user to select products and quantities
 def skincare(request):

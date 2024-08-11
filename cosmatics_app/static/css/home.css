@@ -3,7 +3,10 @@ body {
     padding: 20px;
 }
 .container {
-    background-color: #d3bbbb;
+    background-image: url('../img/background4.jpg')!important;
+    background-size: cover!important;
+    background-position: center !important;
+    /* background-color: #d3bbbb; */
     /* padding: 20px; */
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);

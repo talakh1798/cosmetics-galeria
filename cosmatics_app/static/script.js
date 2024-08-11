@@ -26,6 +26,29 @@ document.addEventListener('DOMContentLoaded', () => {
             valueDetails[index].style.display = 'block';
         });
     });
+
+    // Add event listeners to open lightbox on image click
+    const images = document.querySelectorAll('.image');
+    images.forEach(image => {
+        image.addEventListener('click', () => {
+            const imageName = image.getAttribute('data-image-name');
+            const imageUrl = image.getAttribute('data-image-url');
+
+            // Make an AJAX request to retrieve image data
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `/get_image_data/${imageName}`, true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    const imageData = JSON.parse(xhr.responseText);
+                    openLightbox(imageUrl, imageData.name);
+                }
+            };
+            xhr.send();
+        });
+    });
+
+    // Add event listener to close lightbox
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
 });
 
 function openLightbox(image, name) {
