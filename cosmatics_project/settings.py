@@ -134,7 +134,10 @@ import os
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
+# import os
+# DEBUG = False
+# ALLOWED_HOSTS = ['{{yourEC2.public.ip}}']	# keep the quotes!
+# STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 
 

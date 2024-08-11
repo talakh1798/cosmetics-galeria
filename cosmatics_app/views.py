@@ -65,7 +65,7 @@ def home(request):
 
 
 # this function renders the makeup page with a list of products and a form for the user to select products and quantities
-def makeup(request):
+def makeup(request ):
     products = models.get_makeup()
     if request.method == 'POST':
          # Get the selected products and quantities from the form
@@ -91,7 +91,6 @@ def makeup(request):
         request.session['products_data'] = products_data
         return redirect('purchase')
     return render(request, 'makeup.html', {'products': products})
-
 
 # this function renders the purchase page with the total cost and a list of selected products
 def purchase(request):
@@ -131,4 +130,3 @@ def about_us(request):
     return render(request, 'about_us.html')
 
 
-# Create your views here.

@@ -1,0 +1,7 @@
+bcrypt==4.2.0
+Django==2.2.4
+mysqlclient==2.2.4
+pillow==10.4.0
+pytz==2024.1
+setuptools==70.1.1
+
